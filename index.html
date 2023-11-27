@@ -8,909 +8,211 @@
 <body>
 
     <main>
-        <h2>PRACTICAL 1</h2>
+        <h2>PRACTICAL 1 Data Exploration (Statistical Analysis) and Data Preprocessing (Data Transformation and Dimension Reduction)</h2>
 
-        <h3>Question 1: How to print "Hello World" in PL/SQL?</h3>
-        <p>Use the following PL/SQL code to print "Hello World":</p>
+        <p>import the dataset in the same folder where we are going to execute the code </p>
         <pre>
 <code>
-begin
-    dbms_output.put_line('Hello World');
-end;
-/
-</code>
-</pre>
+import pandas as pd 
 
-        <h3>Question 2: How to add two numbers in PL/SQL?</h3>
-        <p>Use the following PL/SQL code to perform the addition of two numbers:</p>
-        <pre>
-<code>
-declare
-    a number := 5;
-    b number := 10;
-begin
-    dbms_output.put_line('Sum = ' || (a + b));
-end;
-/
-</code>
+#reading the datset
+data = pd.read_csv('SampleSuperstore.csv')
+print(data)
+print("\n")
 
-</pre>
-<h3>Question 3: Write a PL/SQL code to perform addition, subtraction, division and multiplication</h3>
-        <pre>
-<code>
-    declare
-    a number;
-    b number;
-    begin
-    a:=&a;
-    b:=&b;
-    dbms_output.put_line('sum = ' || (a+b));
-    dbms_output.put_line('difference = ' || (a-b));
-    dbms_output.put_line('product = ' || (a*b));
-    dbms_output.put_line('quotient = ' || (a/b));
-    end;
-    
-</code>
+#Returns the first n rows of the object based on the position 
+print("Head data : ")
+print(data.head(12))
+print("\n")
 
-</pre>
-<h3>Question 4)Write a PL/SQL code to find the diameter, circumference and area using the radius of a circle.</h3>
-        <pre>
-<code>
-    declare
-    r number;
-    pi number:=3.14;
-    d number;
-    c number;
-    a number;
-    begin
-    r:=&r;
-    d:=2*r;
-    c:=2*pi*r;
-    a:=pi*r*r;
-    dbms_output.put_line('Diameter = ' ||d );
-    dbms_output.put_line('Circumference = ' || c);
-    dbms_output.put_line('Area = ' || a);
-    end;
-    
-</code>
-        </pre>
-<h2>PRACTICAL 2</h2>
+#Checking the  missing values in the dataset  
+print("Finding the missing Values is any: ")
+print(data.isnull().mean())
+print("\n")
 
-<h3>Question 1)Write a pl/sql code to check whether the entered number is less than 20 using if statement.</h3>
-        <pre>
-<code>
-    declare
-    a number;
-    begin
-    a:=&a;
-    if(a<20) then
-    dbms_output.put_line('The number is less than 20');
-    end if;
-    end;
-</code>
+#Allows the user to analyze and drop rows/coloumns with null values 
+print("analyzing rows and coloumns with null values :")
+print(data.dropna)
+print("\n")
 
-</pre>
-<h3>Question 2) Write a PL/SQL code to check whether the entered number is less than or greater than 20 using if-else statement.</h3>
-        <pre>
-<code>
-    declare
-    a number;
-    begin
-    a:=&a;
-    if(a<20) then
-    dbms_output.put_line('The number is less than 20');
-    else
-    dbms_output.put_line('The number is greater than 20');
-    end if;
-    end;
-    /
-    
-</code>
 
-</pre>
-<h3>Question 3)Write a PL/SQL code to check whether the entered number is even or odd.</h3>
-        <pre>
-<code>
-    declare
-a number;
-begin
-a:=&a;
-if(a mod 2 = 0) then
-dbms_output.put_line('Even Number');
-else
-dbms_output.put_line('Odd Number');
-end if;
-end;
-    
-</code>
-        </pre>
-        <h3>Question 4) Write a PL/SQL program to print the value of variable ‘a’.</h3>
-        <pre>
-<code>
-    declare
- a number:=&a;
- begin
- if(a=10)then
- dbms_output.put_line('value of a is'||a);
- elsif(a=20)then
- dbms_output.put_line('value of a is'||a);
- elsif(a=30)then
- dbms_output.put_line('value of a is'||a);
- else
- dbms_output.put_line('actual value of a is'||a);
- end if;
- End;
-/
+#Calculates and prints the shape of the dataframe
+print("shapes : ")
+print(data.shape)
+print("\n")
 
-    
-</code>
-        </pre>
-        <h3>Question 5)Write a PL/SQL code to compute the commission based on the following conditions.
-            Sales Revenue greater than 2 lakhs Commission=20000
-            Sales Revenue greater than 1 lakh Commission=15000
-            Sales revenue greater than fifty thousand Commission=10000
-            </h3>
-        <pre>
-<code>
-    declare
-s integer:=&s;
-c integer;
-begin
-if(s>200000) then
-c:=20000;
-elsif(s>100000) then
-c:=15000;
-elsif(s>50000) then
-c:=10000;
-else
-c:=0;
-end if;
-dbms_output.put_line('Commission='||c);
-End;
-/
-
-    
-</code>
-        </pre>
-        <h3>Question 6)Write a PL/SQL code to put a remark based on the grade obtained</h3>
-        <pre>
-<code>
-    declare
-g char:='B';
-begin
-if(g='A') then
-dbms_output.put_line('Excellent');
-elsif(g='B')then
-dbms_output.put_line('Very Good');
-elsif(g='C') then
-dbms_output.put_line('Just Pass');
-elsif(g='D')then
-dbms_output.put_line('Fail');
-else
-dbms_output.put_line('Wrong Grade');
-end if;
-End;
-/
-
-<h2>PRACTICAL 3</h2>
+#iloc method
+print("Using iloc method")
+subset = data.iloc[0:3,1:3]
+print(subset)
+print("\n")
 
 </code>
         </pre>
-        <h3>Question 1)Create a table Acct_mstr with fields accounting_no, crust_id, ba;lance, and address.Check if the balance is less than minimum balance(5000) if yes then deduct fees(100) from the current balance.
-        </h3>
-        <pre>
-<code>
-    Creating Table:
 
-
-Create table Acct_mstr(accounting_no INT,
-Cust_id int Primary Key,
-Balance int,
-Address varchar(200));
-
-
-
-Inserting values inside the table: 
-
-
-insert into Acct_mstr values(1,101,20000,’Delhi’);
-insert into Acct_mstr values(2,110,60000,’Mumbai’);
-insert into Acct_mstr values(3,210,40000,’Chennai’);
-insert into Acct_mstr values(4,220,100000,’Goa’);
-insert into Acct_mstr values(51,230,10000,’Hyderabad’);
-
-
-
-
-
-
-declare 
-mcurr_bal number;
-mAcctno number;
-Mfine number:=100;
-mMin_bal constant number(6,2):=5000;
-begin
-mAcctno := &mAccount;
-select balance into mcurr_bal from Acct_mstr where accounting_no=mAcctno;
-If mcurr_bal < mMin_bal THEN update Acct_mstr set balance = (balance-mfine) where accounting_no =mAcctno;
-end if;
-end ;
-/ 
-    
-</code>
-        </pre>
-        <h3>Question  2)Write a pl/sql code to create a table and insert 5 records and give 150 rs bonus from the account whose balance is more than the specified balance amount(more than 500).</h3>
-        <pre>
-<code>
-    declare
-    mcurr_bal number;
-    mAcctno number;
-    mfine number:=100;
-    mBonus number:= 150;
-    mMin_bal constant number(6,2):=5000;
-    begin
-   mAcctno:=&mAcctno;
-  select balance into mcurr_bal from Acct_mstr where account_no=mAcctno;
-   if mcurr_bal<mMin_bal then update Acct_mstr set balance=balance-mfine where
-   account_no=mAcctno;
-   else update Acct_mstr set balance=balance+mBonus where account_no=mAcctno;
-   end if;
-  end;
-    /
-
-  
-
-  select * from Acct_mstr;
-
-    
-</code>
-<h2>PRACTICAL 4</h2>
-
-        </pre>
-        <h3>Question 1)Write a PL/SQL code to display numbers from 1 to 20 using exit statement using if condition.</h3>
-        <pre>
-<code>
-    declare
-a number:=1;
-begin
-loop
-dbms_output.put_line(a);
-a:=a+1;
-if(a>20)then exit;
-end if;
-end loop;
-end;
-/
-
-    
-</code>
-        </pre>
-        <h3>Question 2)Write a PL/SQL code to display numbers from 1 to 20 using exit when statement.</h3>
-        <pre>
-<code>
-    declare
-a number:=1;
-begin
-loop
-dbms_output.put_line(a);
-a:=a+1;
-exit when a>20;
-end loop;
-end;
-/
-    
-</code>
-        </pre>
-        <h3>Question 3) Write a PL/SQL Code to display even numbers from 1 to 20 using a while loop.</h3>
-        <pre>
-<code>
-    declare
-a number:=1;
-begin
-while a<=20 loop
-if(a mod 2=0) then 
-dbms_output.put_line(a);
-end if;
-a:=a+1;
-end loop;
-End;
-/
-
-    
-</code>
-        </pre>
-        <h3>Question 4) Write a PL/SQL Code to calculate the area of the circle where the radius varies from 2 to 7 using loop.</h3>
-        <pre>
-<code>
-    declare
-r integer:= 2;
-pi float:=3.14;
-a float;
-begin
-loop
-a:=pi*r**2;
-dbms_output.put_line('Area = ' ||a);
-r:=r+1;
-exit when r>7;
-end loop;
-End;
-/
-
-    
-</code>
-        </pre>
-        <h3>Question 5) Write a PL/SQL Code to calculate the area of circle where the radius varies from 2 to 7 using for loop.</h3>
-        <pre>
-<code>
-    declare
-r integer:= 2;
-pi float:=3.14;
-a float;
-begin
-for r in 2..7 loop
-a:=pi*r**2;
-dbms_output.put_line('Area = ' ||a);
-end loop;
-end;
-
-    
-</code>
-        </pre>
-        <h2>PRACTICAL 5</h2>
-        <h3>Question 1)Create a table to insert the values of radius and area of a circle and use a for loop to print the area from 2 to 7 and insert the data in the table created.</h3>
-        <pre>
-<code>
-    create table circle(r number not null, a number not null);
-
-
-
-declare
-r number:= 2;
-pi number:=3.14;
-a number;
-begin
-for r in 2..7 loop
-a:=pi*r**2;
-insert into circle values(r,a);
-dbms_output.put_line('Area = ' ||a);
-end loop;
-end;
-
-
-
-select * from circle;
-    
-</code>
-        </pre>
-        <h3>Question 2) Write a PL/SQL code to write the table of a number.</h3>
-        <pre>
-<code>
-    declare
-i number:=1;
-a integer;
-begin
-a:=&a;
-for i in 1..10 loop
-dbms_output.put_line(a || '*' || i || '=' ||(a*i));
-end loop;
-end;
-
-    
-</code>
-        </pre>
-        <h3>Question 3)Write a PL/SQL code to display the numbers in reverse order from 51 to 100.</h3>
-        <pre>
-<code>
-    declare
-i number:=51;
-begin
-for i in REVERSE 51..100 loop
-dbms_output.put_line(i);
-end loop;
-end;
-
-    
-</code>
-        </pre>
-        <h3>Question 4) Write a PL/SQL code to find the reverse of a number.</h3>
-        <pre>
-<code>
-    declare
-n integer;
-r integer;
-m integer:=0;
-begin
-n:=&n;
-while n>0 loop
-r:=mod(n,10);
-m:=(m*10)+r;
-n:=n/10;
-end loop;
-dbms_output.put_line('Reverse = ' ||m);
-end;
-
-    
-</code>
-        </pre>
-        <h3>Question 5)Write a PL/SQL code to print values from 11 to 20 and if the value 15 occurs print “15 is Skipped”..</h3>
-        <pre>
-<code>
-    declare
-a number:=11;
-begin
-<<loopstart>>
-while a<=20
-loop
-if a=15 then
-dbms_output.put_line('15 is skipped');
-a:=a+1;
-goto loopstart;
-end if;
-dbms_output.put_line(a);
-a:=a+1;
-end loop;
-End;
-/
-    
-</code>
-        </pre>
-        <h2>PRACTICAL 6</h2>
-        <h3>Question 1)Write a PL/SQL code to demonstrate the working of a case statement.</h3>
-        <pre>
-<code>
-    declare
-    grade char(1):='A';
-    begin
-    case grade
-    when 'A' then
-    dbms_output.put_line('Excellent');
-    when 'B' then
-    dbms_output.put_line('Good');
-    when 'C' then
-    dbms_output.put_line('Average');
-    when 'F' then
-    dbms_output.put_line('Fail');
-    else
-    dbms_output.put_line('No such grade');
-    end case;
-    End;
-    /
-    
-    
-</code>
-        </pre>
-        <h3>Question 2)Write a pl/sql code if sales is greater than 2000000 then commission is 70%,if sales is less than 2000000 and greater than 1000000 then commission is 50% if sales is less than 1000000 and greater than 50000 then commission is 30% else commission is 10%.</h3>
-        <pre>
-<code>
-    declare
-s integer:=&s;
-c integer;
-begin
-case
-when s>200000 then
-c:=s*0.7;
-when s>100000 AND s<200000 then
-c:=s*0.5;
-when s>50000 AND s<100000 then
-c:=s*0.3;
-else
-c:=s*0.1;
-end case;
-dbms_output.put_line(c);
-end;
-    
-</code>
-        </pre>
-        <h2>PRACTICAL 7</h2>
-        <h3>Question 1)Write a PL/SQL code to create a procedure and print “HELLO WORLD”.</h3>
-        <pre>
-<code>
-    create procedure greetings
-as
-begin
-dbms_output.put_line('hello world');
-end greetings;
-/
-  
-Execute greetings
-
-</code>
-        </pre>
-        <h3>Question 2)Write a PL/SQL code to create a procedure to find multiplication of two numbers.</h3>
-        <pre>
-<code>
-    create procedure multiply1(x in number, y in number)
-as
-begin
-dbms_output.put_line(x*y);
-end multiply1;
-/
-
-
-
-
-declare
-a number;
-b number;
-begin
-a:=&a;
-b:=&b ;
-multiply1(a,b);
-End;
-/
-    
-</code>
-        </pre>
-        <h3>Question 3)Write a PL/SQL code to create a procedure to find the maximum value of two numbers.</h3>
-        <pre>
-<code>
-    create procedure max1(x in number, y in number)
-as
-begin
-if x>y then 
-dbms_output.put_line('Max' ||x);
-else
-dbms_output.put_line('Max' ||y);
-end if;
-end max1;
-/
-
-
-
-declare 
-a number;
-b number;
-begin
-a:=&a;
-b:=&b;
-max1(a,b);
-end;
-/
-    
-</code>
-        </pre>
-        <h3>Question 4)Write a program to create a procedure inside pl/sql code to find the factorial of a number.</h3>
-        <pre>
-<code>
-    declare
-n number;
-i number:=1;
-procedure fact( n in number) as
-begin
-for j in reverse 1..n
-loop
-i:=i*j;
-end loop;
-dbms_output.put_line(i);
-end fact;
-begin
-n:=&n;
-fact(n);
-End;
-    
-</code>
-        </pre>
-        <h3>Question 5)Write a program to create a procedure inside pl/sql code to find the square of a number using a single variable.</h3>
-        <pre>
-<code>
-    declare
-n number;
-procedure square( n in number) as
-begin
-dbms_output.put_line(n*n);
-end square;
-begin
-n:=&n;
-square(n);
-end;
-    
-</code>
-        </pre>
-        <h3>Question 6)Write a program to drop a procedure.</h3>
-        <pre>
-<code>
-    create procedure greetingss
-as
-begin
-dbms_output.put_line('Hello World');
-end greetingss;
-
-
-
-drop procedure greetingss
-
-    
-</code>
-        </pre>
-        <h2>PRACTICAL 8 </h2>
-        <h3>Question 1)Write a PL/SQL code to find the maximum of two numbers using function.</h3>
-        <pre>
-<code>
-    declare
-a number;
-b number;
-c number;
-function findmax(x in number, y in number)return number is
-z number;
-begin
-if x>y then
-z:=x;
-else
-z:=y;
-end if;
-return z;
-end findmax;
-begin
-a:=&a;
-b:=&b;
-c:=findmax(a,b);
-dbms_output.put_line('Maximum = ' ||c);
-end;
-
-
-    
-</code>
-        </pre>
-        <h3>Question 2) Write a PL/SQL code to find the maximum of two numbers using a standalone function.</h3>
-        <pre>
-<code>
-    create or replace function findmax(x in number, y in number)return number is
-z number;
-begin
-if x>y then
-z:=x;
-else
-z:=y;
-end if;
-return z;
-end findmax;
-
-
-
-declare
-a number;
-b number;
-c number;
-begin
-a:=&a;
-b:=&b;
-c:=findmax(a,b);
-dbms_output.put_line('Maximum = ' ||c);
-end;
-    
-</code>
-        </pre>
-        <h3>Question 3)Create a function in PL/SQL to find the average salary of 5 employees from the table.Create a table employee and insert five records in it.</h3>
-        <pre>
-<code>
-    create table employee(
-id number not null, name varchar(50) not null, salary number not null);
-
-
-
-declare
-c number;
-function salary return number is
-total number:=0;
-begin
-select avg(salary) into total from employee;
-return total;
-end salary;
-begin
-c:=salary();
-dbms_output.put_line('Average Salary ' || c);
-end;
-    
-</code>
-        </pre>
-        <h3>Question 4)Create a function to calculate the total number of customers in the table.Create a table customers and insert five records in it.</h3>
-        <pre>
-<code>
-    declare
-n integer;
-r integer;
-m integer:=0;
-begin
-n:=&n;
-while n>0 loop
-r:=mod(n,10);
-m:=(m*10)+r;
-n:=n/10;
-end loop;
-dbms_output.put_line('Reverse = ' ||m);
-end;
-
-    
-</code>
-        </pre>
-        <h3>Question 4) Write a PL/SQL code to find the reverse of a number.</h3>
-        <pre>
-<code>
-    create table customers(
-id number not null, name varchar(50) not null);
-
-
-
-
-
-declare
-c number;
-function totalcustomers return number is
-total number:=0;
-begin
-select count(*) into total from customers;
-return total;
-end totalcustomers;
-begin
-c:=totalcustomers();
-dbms_output.put_line('Number of Records = ' || c);
-end;
-
-    
-</code>
-        </pre>
-        <h2>PRACTICAL 9</h2>
-        <h3>Question 1)Create a table employee and insert two values in it. Create a trigger that will not allow the user to enter any new value into the table.</h3>
-        <pre>
-<code>
-    create table employeee(
-id number not null, name varchar(50) not null, salary number not null);
-
-
-
-
-create trigger put
-before insert on employee
-begin
-raise_Application_error(-20000,'Cannot insert any value into the table');
-end;
-
-
-    
-</code>
-        </pre>
-        <h3>Question 2)Create a trigger which will not allow us to enter any new values to table employee whose id is greater than 100.</h3>
-        <pre>
-<code>
-    create table employeeee(
-id number not null, name varchar(50) not null, salary number not null);
-
-
-
-create trigger allow
-before insert on employeeee
-for each row
-when (new.id>100)
-begin
-raise_Application_error(-20000,'Cannot insert any value into the table');
-end;
-
-
-    
-</code>
-        </pre>
-        <h3>Question 3)Create a trigger that will not allow the user to drop any table.</h3>
-        <pre>
-<code>
-    create trigger drop1
-before drop on schema
-begin
-raise_application_error(-20001,'Cannot drop table');
-end;
-
-
-    
-</code>
-        </pre>
-        <h3>Question 4)Write a PL/SQL code to drop a trigger. </h3>
-        <pre>
-<code>
-    drop trigger drop1;
-    
-</code>
-        </pre>
-        <h2> PRACTICAL 10 </h2>
-        <h3>Question 1)Create a supplier table with attributes supplier_id and name. Create a sequence to increment the id by 2, minvalue 1 and maxvalue 99.</h3>
-        <pre>
-<code>
-    create table supplier(
-        supplier_id number not null, name varchar(20) not null);
         
-        
-        
-        create sequence sup_id
-        increment by 2
-        start with 1
-        minvalue 1
-        maxvalue 99
-        nocycle
-        order;
-        
-        
-        
-        insert into supplier values(sup_id.nextval,'r');
-        insert into supplier values(sup_id.nextval,'s');
-        insert into supplier values(sup_id.nextval,'d');
-        
-        
-        
-        select * from supplier;        
-    
-</code>
-        </pre>
-        <h3>Question 2)Create a student table with attritbute roll number and student name. Create a sequence to increment the id by 1, minvalue 1, maxvalue 99 
-        </h3>
+        <h2>PRACTICAL 3 Study of Data Mining tool – WEKA</h2>
+
+        <h3></h3>
+        <p>WEKA, which stands for Waikato Environment for Knowledge Analysis, is a popular and open-source data mining tool developed by the University of Waikato in New Zealand. It provides a comprehensive set of tools and algorithms for data preprocessing, machine learning, and data mining tasks. WEKA is widely used for research, education, and practical applications in the field of data mining and machine learning.
+Key features and capabilities of WEKA include:
+User-Friendly Interface: WEKA offers a graphical user interface (GUI) that allows users to interact with the tool easily. It's suitable for both beginners and experienced data miners.
+Data Preprocessing: WEKA provides a range of data preprocessing techniques for tasks like data cleaning, transformation, feature selection, and handling missing values. This ensures data quality and suitability for mining.
+Machine Learning Algorithms: WEKA includes a diverse collection of machine learning algorithms, including decision trees, support vector machines, neural networks, clustering algorithms, and more. Users can apply these algorithms to various data mining tasks.
+Experimentation and Evaluation: Users can design and run experiments to evaluate the performance of different machine learning models and algorithms. WEKA supports cross-validation, training/testing splits, and other evaluation methods.
+Data Visualization: The tool offers visualization capabilities for exploring datasets and model results, making it easier to understand and interpret data.
+Data Import/Export: WEKA can import and export data in various formats, making it compatible with a wide range of datasets.
+Extensibility: Users can extend WEKA's functionality by adding custom algorithms, filters, and other components.
+Active Community: WEKA has an active user community and a rich set of resources, including documentation, tutorials, and forums for users to seek help and share knowledge.
+WEKA has been used in both academic and industrial settings for a variety of data mining applications, including classification, clustering, regression, feature selection, and more. It provides a valuable platform for experimenting with and applying machine learning techniques to real-world data analysis tasks. As an open-source tool, it is freely available for download and use, making it accessible to a wide audience interested in data mining and machine learning.
+</p>
         <pre>
 <code>
-    create table student(roll number not null, name varchar(20) not null);
 
 
-    create sequence seq
-    increment by 1
-    start with 1
-    minvalue 1
-    maxvalue 99
-    nocycle
-    order;
-    
-    
-    
-    insert into student values(seq.nextval,'Tanish1');
-    insert into student values(seq.nextval,'Tanish2');
-    insert into student values(seq.nextval,'Tanish3');
-    
-    
-    
-    
-    
-    select * from sudent;
-    
-    
 </code>
         </pre>
-        <h2>PRACTICAL 11</h2>
-        <h3>Question  1) Create a table employee with attributes employee id, name, address contact number, salary and location. Insert 5 records in the employee table. Update the salary as 50000 of an employee whose id is 103 Delete the employee who stays in Ghatkopar Add column department in the employee table Add values to the department column in the employee table Drop table employee</h3>
-        <pre>
-<code>
-    create table eemployee(emp_id number, emp_name varchar(20) , emp_add varchar(20) ,
-emp_phone number,emp_salary number,emp_location varchar(20) );
+        <h2>PRACTICAL 4 Implementation of pre-processing in WEKA</h2>
+
+        <h3></h3>
+        <p>
+            Click on Explorer > Click on the open file button > Open the CPU dataset > Now see that each column's minimum and maximum values vary differently, so apply normalization on the dataset. > click on the choose below filter Inside attribute choose normalize and apply to the dataset > Min-max range will be within 0-1 > Now click on edit and perform various operations like
+>  modify the column values
+>  Add the instance  
+
+        </p>
+
+        <h2>PRACTICAL 05: Implementation of any one classifier 
+        </h2>
+
+        <p>
+             choose dataset > We have chosen weather with numeric > Now go to classify >
+             Choose the classifier In trees -> choose J48 >
+             Then click on start Classifier output will be shown  >
+             Now right-click on one of the results from the result list -> visualize the tree
+
+        </p>
+        <h2> PRACTICAL 06: Clustering using simpleKmeans </h2>
+
+        <p>
+            Choose cluster 
+            >
+            Then inside the cluster choose simpleKmeans
+            >
+            Click on start
+                        
+        </p>
+        <h2> PRACTICAL 07: Implementation of association mining rule –Apriori algorithm</h2>
+
+        <p>
+            Select Associate  
+>
+Choose apriori as the Associator 
+>
+Click on start 
+>
+The result will be shown.
+                        
+        </p>
+        <h2> PRACTICAL 08: Experimenter
+        </h2>
+
+        <p>
+            Click on Experimenter 
+            >
+Goto Setup 
+>
+Then New 
+>
+Then add new Datasets 
+>
+Choose Iris Dataset 
+>
+Goto algorithms 
+>
+Add all the algo you want to perform 
+>
+Run the test 
+                        
+        </p>
+
+        <h2> PRACTICAL 09: KDD
+        </h2>
+
+        <p>
+            Click on Knowledgeflow
+            >
+            Click on Datasources and select ArffLoader
+            >
+            Go to Evalutaion and select ClassAssigner and CrossValidationFoldMaker
+            >
+            Go to Classifiers -> Trees -> Select J48
+            >
+            Go to Evaluation again and select ClassifierPerformanceEvaluator
+            >
+            Go to Visualization and select TextViewer
+            >
+            Right click on ArrfLoader and select Dataset and connect it to ClassAssigner 
+            >
+            Right click on ClassAssigner and select Dataset and connect it to CrossValidationFoldMaker
+            >
+            Right click on CrossValidationFoldMaker and select Training set, Test set and connect it to J48
+            >
+            Right click on J48 and select BatchClassifier and connect it to ClassifierPerformanceEvaluator
+            >
+            Right click on ClassifierPerformanceEvaluator and select Text and then connect it to TextViewer
+            >
+            Right click on ArrfLoader then select configure 
+            >
+            Select any dataset you want 
+            >
+            Configure ClassAssigner to nom(class)
+            >
+            Run
+            >
+            Result in TextViwer                           
+        </p>
+        <h2> PRACTICAL 10
+
+            Practical on any Business Intelligence application.
+            a) Problem definition, identifying which data mining task is needed
+            b) Identify and use a standard data mining dataset available for the problem.
+            
+        </h2>
+
+        <p>
+            Problem Definition : Classify Iris flowers into species based on features.
+Data Mining Task : Classification.
+
+Step 1 : 
+Open the WEKA application and the first page is displayed where you have the option to choose from various applications that WEKA supports.
+
+Step 2 : 
+Click on “Explorer” and the below image is shown
+
+Step 3 : 
+Click on “Open File” and then open the “iris” dataset.
+
+Step 4 : 
+Click on the “Choose” button. Choose the “Normalize” filter and then click “Apply”
+
+Missing values can be checked by using the “ReplaceMissingValues” filter.
+
+Step 5 : 
+Go to the “Classify” tab 
+
+Click on “Choose” then select “J48” from “trees”. 
+
+Select the column required, then click on “Start”. Here. the column chosen is “class”
+
+
+Right click on the J48 tab and select “Visualize tree”
 
 
 
-
-insert into eemployee values(101,'Tanish1','ABC',23445,60000,'Thane');
-insert into eemployee values(102,'Tanish2','DEF',234235,670000,'Andheri');
-insert into eemployee values(103,'Tanish3','RST',233345,590000,'Vashi');
-insert into eemployee values(104,'Tanish4','XYZ',237845,50,'Ghatkopar');
-insert into eemployee values(105,'Tanish5','PQR',2345645,130000,'Kalyan');
-
-
-
-update eemployee set emp_salary=50000 where emp_id=103;
-
-
-delete from eemployee where emp_location='Ghatkopar';
-
-
-
-alter table eemployee add emp_department varchar(20); 
-
-update eemployee set emp_department='PR' where emp_id=101; 
-
-update eemployee set emp_department='Finance' where emp_id=102; 
-
-update eemployee set emp_department='Marketing' where emp_id=105;
-
-
-
-
-drop table eemployee;
-
-
-    
-</code>
-        </pre>
-        
+Now, the model can also be used to experiment with different classifiers and other algorithms to enhance their performance. 
+It can then be interpreted and used to make predictions on new instances of iris flowers and can also be deployed for classification of iris flowers in real-time.                          
+        </p>
     </main>
 
     <footer>
